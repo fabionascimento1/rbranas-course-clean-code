@@ -1,16 +1,19 @@
 export default class Coupon {
   constructor(
     readonly code: string,
-    readonly porcentage: number,
+    readonly percentage: number,
     readonly expireDate?: Date
   ) {}
 
-  isValid() {
+  isValid(today: Date = new Date()) {
     if (!this.expireDate) return true;
-    const today = new Date();
     return this.expireDate.getTime() >= today.getTime();
   }
-  isExpired() {
-    return !this.isValid();
+  isExpired(today: Date = new Date()) {
+    return !this.isValid(today);
+  }
+  calculateDiscount(amount: number, today: Date = new Date()) {
+    if (this.isExpired(today)) return 0;
+    return (amount * this.percentage) / 100;
   }
 }
