@@ -6,7 +6,7 @@ import OrderItem from "./OrderItem";
 
 export default class Order {
   cpf: ValidateCPF;
-  orderItems: OrderItem[];
+  private orderItems: OrderItem[];
   coupon: Coupon | undefined;
   private freight: number;
 
